@@ -111,6 +111,7 @@ def sendcommand(sshclient, ip, user, password, commands):
     # a sleep timer of 3s after each command.
     for command in commands:
         command = textwrap.wrap(command)[0]
+		logger.debug('Executing command %s' %command)
         sshsession.send(command)
         # Don't forget to press 'Enter' after each command. This will do.
         sshsession.send('\n')
@@ -170,6 +171,7 @@ try:
             try:
                 # Run the SSH commands list object against the current device
                 # IP/Hostname by using function 'sendcommand'
+				logger.info('Sending commands to %s' %ip)
                 output, hostname = sendcommand(sshclient, ip, user, password, commands)
 
                 # Setting output filename based on the devices hostname, datetimestring
